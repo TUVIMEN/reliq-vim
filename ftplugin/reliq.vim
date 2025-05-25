@@ -7,7 +7,8 @@ let s:cpo_save = &cpo
 set cpo-=C
 
 "compiler reliq
-setlocal comments& comments^=sO:* -,mO:*  ,exO:*/
+"setlocal comments& comments=sO:/*,mO:*,exO:*/
+setlocal comments& comments=sO:{-,exO:-}
 setlocal commentstring=//\ %s
 
 setlocal formatoptions-=t formatoptions+=croql
