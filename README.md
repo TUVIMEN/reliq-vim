@@ -2,6 +2,9 @@
 
 Syntax highlighting plugin for [reliq](https://github.com/TUVIMEN/reliq).
 
+![1](1.jpg)
+![2](2.jpg)
+
 ## Installation
 
 [Vim-Plug](https://github.com/junegunn/vim-plug)
