@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language: reliq
 " Maintainer: Dominik Stanisław Suchora <suchora.dominik7@gmail.com>
-" Last Change: 2025-03-02
+" Last Change: 2025-05-29
 
 if exists("b:current_syntax")
   finish
@@ -35,30 +35,36 @@ syn match rqHooks "\s@"
 syn match rqSpecialCharacter contained "\\."
 syn region rqString start=+"+ skip=+\\\\\|\\"+ end=+"+ contains=rqSpecialCharacter
 syn region rqString start=+'+ skip=+\\\\\|\\'+ end=+'+ contains=rqSpecialCharacter
-syn match rqNumber "-\?\d\+" contained
+syn match rqNumber "-\?\d\+\(\.\d\+\)\?" contained
 syn region rqRange start="\[" end="\]" contains=rqNumber
 syn match rqSemicolon ";"
 syn match rqComma ","
 
-syn match rqField "\(^\|,\|{\)\s*\.[a-zA-Z0-9_-]\+" nextgroup=rqFieldType,rqFieldArray,rqChain
+syn match rqField "\(^\s*\|,\|{\)\s*\.[a-zA-Z0-9_-]\+" nextgroup=rqFieldType,rqChain
 
-syn match rqFieldArray ".a[a-zA-Z0-9]*" nextgroup=rqFieldType,rqChain contained
-syn match rqFieldArray ".a[a-zA-Z0-9]*(\"\(\\[0anrtbfv]\|.\)\")" nextgroup=rqFieldType,rqChain contained
+syn match rqFieldType "\." nextgroup=rqFieldTypeN,rqFieldTypeNDef contained
+syn match rqFieldTypeC "|" nextgroup=rqFieldTypeN,rqFieldTypeNDef contained
 
-syn match rqFieldType "\.[sbniu][a-zA-Z0-9]*" nextgroup=rqChain contained
+"syn match rqFieldTypeArgs "([^)]\+)" nextgroup=rqFieldType,rqChain
+syn region rqFieldTypeArgs start='(' end=').*' contained contains=rqString,rqNumber,rqComma,rqFieldType,rqFieldTypeC,rqChain
+
+syn match rqFieldTypeN "[a-zA-Z0-9_-]\+" nextgroup=rqFieldTypeC,rqFieldTypeArgs,rqChain contained
+syn match rqFieldTypeNDef "a\>" nextgroup=rqFieldType,rqFieldTypeC,rqFieldTypeArgs,rqChain contained
+syn match rqFieldTypeNDef "[sbniuNdU]\>" nextgroup=rqFieldTypeC,rqFieldTypeArgs,rqChain contained
 
 syn match rqConditionals "\(\s\|^\)\(&&\|&\|||\|\^&&\|\^&\|\^||\)\(\s\|$\)"
 
-syn region rqFormat start='\(\s\|^\)[|/]\(\s\|$\)' end=',\|$' contained contains=rqString,rqRange,rqComma,rqOneLineComment,rqMultilineComment
+syn region rqFormat start='\(\s\|^\)[|/]' end=',\|$' contained contains=rqString,rqRange,rqComma,rqOneLineComment,rqMultilineComment
 
-syn region rqChain transparent start='\s' end=",\|$" contained contains=rqTag,rqHooks,rqString,rqRange,rqSemicolon,rqBlock,rqComma,rqConditionals,rqFormat,rqField,rqOneLineComment,rqMultilineComment
+syn region rqChain transparent start='\s\|^' end=",\|$" contained contains=rqTag,rqHooks,rqString,rqRange,rqSemicolon,rqBlock,rqComma,rqConditionals,rqFormat,rqField,rqOneLineComment,rqMultilineComment
 
 syn region rqBlock start="{" end="}" contains=rqHooks,rqString,rqRange,rqSemicolon,rqField,rqBlock,rqConditionals,rqFormat,rqComma,rqOneLineComment,rqMultilineComment
 "syn region rqBlock start="{" end=/}\(\_s\+\ze\("\|{\)\)\@!/ transparent fold contains=rqHooks,rqString,rqRange,rqSemicolon,rqComma,rqField
 
 hi def link rqField Function
 hi def link rqFieldType rqField
-hi def link rqFieldArray rqField
+hi def link rqFieldTypeN rqField
+hi def link rqFieldTypeNDef Label
 hi def link rqTag Type
 hi def link rqChain Statement
 hi def link rqHooks Special
