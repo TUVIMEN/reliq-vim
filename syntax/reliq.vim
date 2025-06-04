@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language: reliq
-" Maintainer: Dominik Stanisław Suchora <suchora.dominik7@gmail.com>
+" Maintainer: Dominik Stanisław Suchora <hexderm@gmail.com>
 " Last Change: 2025-06-04
 
 if exists("b:current_syntax")
