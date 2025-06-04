@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language: reliq
 " Maintainer: Dominik Stanisław Suchora <suchora.dominik7@gmail.com>
-" Last Change: 2025-05-29
+" Last Change: 2025-06-04
 
 if exists("b:current_syntax")
   finish
@@ -26,7 +26,7 @@ syn match rqHooks "\s[+-]\?\(all\|insides\|start\|name\|attributes\|has\|end\|en
 " shortened access hooks
 syn match rqHooks "\s\(desc\|sibl\|spre\|ssub\|fsibl\|fspre\|fssub\|rparent\)@"
 " access hooks
-syn match rqHooks "\s\(self\|child\|descendant\|ancestor\|parent\|full\|relative_parent\|sibling\|sibling_preceding\|sibling_subsequent\|full_sibling\|full_sibling_preceding\|full_sibling_subsequent\)@"
+syn match rqHooks "\s\(self\|child\|descendant\|ancestor\|parent\|full\|relative_parent\|sibling\|sibling_preceding\|sibling_subsequent\|full_sibling\|full_sibling_preceding\|full_sibling_subsequent\|everything\|preceding\|subsequent\|after\|before\)@"
 " type hooks
 syn match rqHooks "\s\(node\|comment\|text\|textempty\|textnoerr\|texterr\|textall\)@"
 " shortened self hook
